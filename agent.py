@@ -3,7 +3,7 @@ import torch
 import random
 import numpy as np
 from collections import deque
-from snake.py import SnakeGameAI, Direction, Point
+from snake import SnakeGameAI, Direction, Point
 
 MAX_MEMORY = 100_000
 BATCH_SIZE = 1000
@@ -53,7 +53,7 @@ class Agent:
             dir_l,
             dir_r,
             dir_u,
-            dir_d
+            dir_d,
 
             # food location
             game.food.x < game.head.x, #food l
@@ -61,6 +61,8 @@ class Agent:
             game.food.y < game.head.y, #food u
             game.food.y > game.head.y, #food d
             ]
+        
+
         return np.array(state, dtype=int)
 
     def remember(self, state, action, reward, next_state, done):
@@ -127,7 +129,7 @@ def train():
                 record = score
                 # agent.model.save()
 
-            print('Game, agent.n_games, 'Score', score, 'Record', record) 
+            print('Game', agent.n_games, 'Score', score, 'Record', record) 
             # plot
 
 if __name__== '___main__':
